@@ -1,0 +1,13 @@
+[Unit]
+Description=Server for EXAMPLE.COM
+After=haproxy.service
+
+[Service]
+ExecStart=/bin/sudo -u USERNAME screen -dmS USERNAME zsh -c "source ~/.zshrc;
+sbcl --load init.lisp; exec zsh"
+ExecStop=/root/shell-scripts/sysadmin/end-server-screen-process USERNAME
+Type=forking
+GuessMainPID=no
+
+[Install]
+WantedBy=multi-user.target
